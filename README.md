@@ -1,4 +1,4 @@
-# icon_generator
+# icon_maker
 
 A new Flutter project.
 
