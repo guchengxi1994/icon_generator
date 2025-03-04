@@ -112,27 +112,39 @@ class _HomeState extends ConsumerState<Home> {
                         ),
                         RepaintBoundary(
                           key: _globalKey,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(radius),
-                            child: Container(
-                              width: 400,
-                              height: 400,
-                              padding: EdgeInsets.all(padding),
-                              decoration: BoxDecoration(
-                                color:
-                                    hovering
-                                        ? Styles.lightTheme.cardColor
-                                        : Colors.grey[200],
+                          child: SizedBox(
+                            width: 400,
+                            height: 400,
+                            child: Center(
+                              child: Container(
+                                width: 400 - padding * 2,
+                                height: 400 - padding * 2,
+                                // padding: EdgeInsets.all(padding),
+                                decoration: BoxDecoration(
+                                  color:
+                                      file == null
+                                          ? hovering
+                                              ? Styles.lightTheme.cardColor
+                                              : Colors.grey[200]
+                                          : Colors.transparent,
+                                ),
+                                child:
+                                    file == null
+                                        ? Center(
+                                          child: Text("Drag/select image here"),
+                                        )
+                                        : Center(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              radius,
+                                            ),
+                                            child: Image.file(
+                                              File(file!.path),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
                               ),
-                              child:
-                                  file == null
-                                      ? Center(
-                                        child: Text("Drag/select image here"),
-                                      )
-                                      : Image.file(
-                                        File(file!.path),
-                                        fit: BoxFit.cover,
-                                      ),
                             ),
                           ),
                         ),
@@ -175,7 +187,7 @@ class _HomeState extends ConsumerState<Home> {
               onPressed: () {
                 _captureScreenshot();
               },
-              child: Text("Click"),
+              child: Text("Save icon"),
             ),
           ],
         ),
